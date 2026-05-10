@@ -1,0 +1,459 @@
+{
+  "rows": 17049,
+  "cols": 18,
+  "features": [
+    "Order_ID",
+    "Customer_ID",
+    "Date",
+    "Age",
+    "Gender",
+    "City",
+    "Product_Category",
+    "Unit_Price",
+    "Quantity",
+    "Discount_Amount",
+    "Total_Amount",
+    "Payment_Method",
+    "Device_Type",
+    "Session_Duration_Minutes",
+    "Pages_Viewed",
+    "Is_Returning_Customer",
+    "Delivery_Time_Days",
+    "Customer_Rating"
+  ],
+  "missing_total": 261882,
+  "rating_dist": {
+    "1": 101,
+    "2": 211,
+    "3": 408,
+    "4": 859,
+    "5": 921
+  },
+  "returning": {
+    "True": 2199,
+    "False": 301
+  },
+  "gender": {
+    "Female": 1249,
+    "Male": 1213,
+    "Other": 38
+  },
+  "city": {
+    "Istanbul": 654,
+    "Ankara": 378,
+    "Izmir": 275,
+    "Bursa": 224,
+    "Antalya": 197,
+    "Gaziantep": 191,
+    "Konya": 178,
+    "Adana": 166,
+    "Kayseri": 141,
+    "Eskisehir": 96
+  },
+  "category": {
+    "Books": 339,
+    "Electronics": 326,
+    "Sports": 325,
+    "Home & Garden": 318,
+    "Beauty": 306,
+    "Food": 304,
+    "Toys": 304,
+    "Fashion": 278
+  },
+  "payment": {
+    "Credit Card": 1009,
+    "Debit Card": 651,
+    "Digital Wallet": 443,
+    "Bank Transfer": 259,
+    "Cash on Delivery": 138
+  },
+  "device": {
+    "Mobile": 1377,
+    "Desktop": 876,
+    "Tablet": 247
+  },
+  "avg_total": 1299.69,
+  "median_total": 444.49,
+  "total_revenue": 3249235.13,
+  "avg_rating": 3.92,
+  "unique_customers": 755,
+  "rev_by_cat": {
+    "Beauty": 99430.86,
+    "Books": 52349.92,
+    "Electronics": 1589675.89,
+    "Fashion": 208491.87,
+    "Food": 54901.24,
+    "Home & Garden": 615786.73,
+    "Sports": 477776.2,
+    "Toys": 150822.42
+  },
+  "rev_by_city": {
+    "Adana": 177919.48,
+    "Ankara": 494170.63,
+    "Antalya": 243997.29,
+    "Bursa": 289300.89,
+    "Eskisehir": 140329.65,
+    "Gaziantep": 295249.45,
+    "Istanbul": 811625.03,
+    "Izmir": 371975.15,
+    "Kayseri": 201826.62,
+    "Konya": 222840.94
+  },
+  "corr": {
+    "Age": {
+      "Age": 1.0,
+      "Unit_Price": -0.012,
+      "Quantity": 0.011,
+      "Discount_Amount": 0.003,
+      "Total_Amount": -0.007,
+      "Session_Duration_Minutes": 0.028,
+      "Pages_Viewed": -0.011,
+      "Delivery_Time_Days": 0.002,
+      "Customer_Rating": -0.005
+    },
+    "Unit_Price": {
+      "Age": -0.012,
+      "Unit_Price": 1.0,
+      "Quantity": -0.014,
+      "Discount_Amount": 0.519,
+      "Total_Amount": 0.866,
+      "Session_Duration_Minutes": 0.013,
+      "Pages_Viewed": 0.01,
+      "Delivery_Time_Days": -0.005,
+      "Customer_Rating": -0.014
+    },
+    "Quantity": {
+      "Age": 0.011,
+      "Unit_Price": -0.014,
+      "Quantity": 1.0,
+      "Discount_Amount": 0.114,
+      "Total_Amount": 0.25,
+      "Session_Duration_Minutes": -0.017,
+      "Pages_Viewed": -0.02,
+      "Delivery_Time_Days": 0.002,
+      "Customer_Rating": 0.018
+    },
+    "Discount_Amount": {
+      "Age": 0.003,
+      "Unit_Price": 0.519,
+      "Quantity": 0.114,
+      "Discount_Amount": 1.0,
+      "Total_Amount": 0.496,
+      "Session_Duration_Minutes": -0.012,
+      "Pages_Viewed": 0.01,
+      "Delivery_Time_Days": -0.036,
+      "Customer_Rating": -0.028
+    },
+    "Total_Amount": {
+      "Age": -0.007,
+      "Unit_Price": 0.866,
+      "Quantity": 0.25,
+      "Discount_Amount": 0.496,
+      "Total_Amount": 1.0,
+      "Session_Duration_Minutes": -0.001,
+      "Pages_Viewed": -0.01,
+      "Delivery_Time_Days": -0.01,
+      "Customer_Rating": -0.021
+    },
+    "Session_Duration_Minutes": {
+      "Age": 0.028,
+      "Unit_Price": 0.013,
+      "Quantity": -0.017,
+      "Discount_Amount": -0.012,
+      "Total_Amount": -0.001,
+      "Session_Duration_Minutes": 1.0,
+      "Pages_Viewed": 0.005,
+      "Delivery_Time_Days": -0.001,
+      "Customer_Rating": -0.024
+    },
+    "Pages_Viewed": {
+      "Age": -0.011,
+      "Unit_Price": 0.01,
+      "Quantity": -0.02,
+      "Discount_Amount": 0.01,
+      "Total_Amount": -0.01,
+      "Session_Duration_Minutes": 0.005,
+      "Pages_Viewed": 1.0,
+      "Delivery_Time_Days": -0.017,
+      "Customer_Rating": -0.012
+    },
+    "Delivery_Time_Days": {
+      "Age": 0.002,
+      "Unit_Price": -0.005,
+      "Quantity": 0.002,
+      "Discount_Amount": -0.036,
+      "Total_Amount": -0.01,
+      "Session_Duration_Minutes": -0.001,
+      "Pages_Viewed": -0.017,
+      "Delivery_Time_Days": 1.0,
+      "Customer_Rating": -0.023
+    },
+    "Customer_Rating": {
+      "Age": -0.005,
+      "Unit_Price": -0.014,
+      "Quantity": 0.018,
+      "Discount_Amount": -0.028,
+      "Total_Amount": -0.021,
+      "Session_Duration_Minutes": -0.024,
+      "Pages_Viewed": -0.012,
+      "Delivery_Time_Days": -0.023,
+      "Customer_Rating": 1.0
+    }
+  },
+  "corr_cols": [
+    "Age",
+    "Unit_Price",
+    "Quantity",
+    "Discount_Amount",
+    "Total_Amount",
+    "Session_Duration_Minutes",
+    "Pages_Viewed",
+    "Delivery_Time_Days",
+    "Customer_Rating"
+  ],
+  "dist_age": [
+    {
+      "x": 20.85,
+      "y": 465
+    },
+    {
+      "x": 26.55,
+      "y": 444
+    },
+    {
+      "x": 32.25,
+      "y": 455
+    },
+    {
+      "x": 37.95,
+      "y": 427
+    },
+    {
+      "x": 43.65,
+      "y": 356
+    },
+    {
+      "x": 49.35,
+      "y": 175
+    },
+    {
+      "x": 55.05,
+      "y": 128
+    },
+    {
+      "x": 60.75,
+      "y": 32
+    },
+    {
+      "x": 66.45,
+      "y": 11
+    },
+    {
+      "x": 72.15,
+      "y": 7
+    }
+  ],
+  "dist_total": [
+    {
+      "x": 593.13,
+      "y": 1813
+    },
+    {
+      "x": 1753.1,
+      "y": 302
+    },
+    {
+      "x": 2913.07,
+      "y": 134
+    },
+    {
+      "x": 4073.05,
+      "y": 90
+    },
+    {
+      "x": 5233.02,
+      "y": 53
+    },
+    {
+      "x": 6393.0,
+      "y": 37
+    },
+    {
+      "x": 7552.97,
+      "y": 12
+    },
+    {
+      "x": 8712.94,
+      "y": 14
+    },
+    {
+      "x": 9872.92,
+      "y": 7
+    },
+    {
+      "x": 11032.89,
+      "y": 13
+    }
+  ],
+  "dist_session": [
+    {
+      "x": 6.05,
+      "y": 24
+    },
+    {
+      "x": 8.15,
+      "y": 78
+    },
+    {
+      "x": 10.25,
+      "y": 265
+    },
+    {
+      "x": 12.35,
+      "y": 539
+    },
+    {
+      "x": 14.45,
+      "y": 672
+    },
+    {
+      "x": 16.55,
+      "y": 540
+    },
+    {
+      "x": 18.65,
+      "y": 273
+    },
+    {
+      "x": 20.75,
+      "y": 84
+    },
+    {
+      "x": 22.85,
+      "y": 23
+    },
+    {
+      "x": 24.95,
+      "y": 2
+    }
+  ],
+  "dist_pages": [
+    {
+      "x": 2.7,
+      "y": 17
+    },
+    {
+      "x": 4.1,
+      "y": 35
+    },
+    {
+      "x": 5.5,
+      "y": 287
+    },
+    {
+      "x": 6.9,
+      "y": 315
+    },
+    {
+      "x": 8.3,
+      "y": 405
+    },
+    {
+      "x": 9.7,
+      "y": 830
+    },
+    {
+      "x": 11.1,
+      "y": 313
+    },
+    {
+      "x": 12.5,
+      "y": 252
+    },
+    {
+      "x": 13.9,
+      "y": 29
+    },
+    {
+      "x": 15.3,
+      "y": 17
+    }
+  ],
+  "monthly": [
+    {
+      "Date": "2023-01",
+      "revenue": 209336.23,
+      "orders": 158
+    },
+    {
+      "Date": "2023-02",
+      "revenue": 256231.24,
+      "orders": 163
+    },
+    {
+      "Date": "2023-03",
+      "revenue": 264173.37,
+      "orders": 162
+    },
+    {
+      "Date": "2023-04",
+      "revenue": 158144.27,
+      "orders": 159
+    },
+    {
+      "Date": "2023-05",
+      "revenue": 206719.57,
+      "orders": 163
+    },
+    {
+      "Date": "2023-06",
+      "revenue": 188078.67,
+      "orders": 167
+    },
+    {
+      "Date": "2023-07",
+      "revenue": 221165.62,
+      "orders": 162
+    },
+    {
+      "Date": "2023-08",
+      "revenue": 216903.95,
+      "orders": 163
+    },
+    {
+      "Date": "2023-09",
+      "revenue": 230087.65,
+      "orders": 167
+    },
+    {
+      "Date": "2023-10",
+      "revenue": 226840.6,
+      "orders": 187
+    },
+    {
+      "Date": "2023-11",
+      "revenue": 208057.59,
+      "orders": 171
+    },
+    {
+      "Date": "2023-12",
+      "revenue": 295359.48,
+      "orders": 195
+    },
+    {
+      "Date": "2024-01",
+      "revenue": 194029.93,
+      "orders": 182
+    },
+    {
+      "Date": "2024-02",
+      "revenue": 200640.73,
+      "orders": 175
+    },
+    {
+      "Date": "2024-03",
+      "revenue": 173466.23,
+      "orders": 126
+    }
+  ]
+}
