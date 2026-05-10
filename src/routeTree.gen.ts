@@ -9,38 +9,141 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppUploadRouteImport } from './routes/_app/upload'
+import { Route as AppRegressionRouteImport } from './routes/_app/regression'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppComparisonRouteImport } from './routes/_app/comparison'
+import { Route as AppClassificationRouteImport } from './routes/_app/classification'
+import { Route as AppAnalysisRouteImport } from './routes/_app/analysis'
+import { Route as AppAboutRouteImport } from './routes/_app/about'
 
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppUploadRoute = AppUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRegressionRoute = AppRegressionRouteImport.update({
+  id: '/regression',
+  path: '/regression',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppComparisonRoute = AppComparisonRouteImport.update({
+  id: '/comparison',
+  path: '/comparison',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClassificationRoute = AppClassificationRouteImport.update({
+  id: '/classification',
+  path: '/classification',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnalysisRoute = AppAnalysisRouteImport.update({
+  id: '/analysis',
+  path: '/analysis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAboutRoute = AppAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AppAboutRoute
+  '/analysis': typeof AppAnalysisRoute
+  '/classification': typeof AppClassificationRoute
+  '/comparison': typeof AppComparisonRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/regression': typeof AppRegressionRoute
+  '/upload': typeof AppUploadRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AppAboutRoute
+  '/analysis': typeof AppAnalysisRoute
+  '/classification': typeof AppClassificationRoute
+  '/comparison': typeof AppComparisonRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/regression': typeof AppRegressionRoute
+  '/upload': typeof AppUploadRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/about': typeof AppAboutRoute
+  '/_app/analysis': typeof AppAnalysisRoute
+  '/_app/classification': typeof AppClassificationRoute
+  '/_app/comparison': typeof AppComparisonRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/regression': typeof AppRegressionRoute
+  '/_app/upload': typeof AppUploadRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/classification'
+    | '/comparison'
+    | '/dashboard'
+    | '/regression'
+    | '/upload'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/classification'
+    | '/comparison'
+    | '/dashboard'
+    | '/regression'
+    | '/upload'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/about'
+    | '/_app/analysis'
+    | '/_app/classification'
+    | '/_app/comparison'
+    | '/_app/dashboard'
+    | '/_app/regression'
+    | '/_app/upload'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +151,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/upload': {
+      id: '/_app/upload'
+      path: '/upload'
+      fullPath: '/upload'
+      preLoaderRoute: typeof AppUploadRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/regression': {
+      id: '/_app/regression'
+      path: '/regression'
+      fullPath: '/regression'
+      preLoaderRoute: typeof AppRegressionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/comparison': {
+      id: '/_app/comparison'
+      path: '/comparison'
+      fullPath: '/comparison'
+      preLoaderRoute: typeof AppComparisonRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/classification': {
+      id: '/_app/classification'
+      path: '/classification'
+      fullPath: '/classification'
+      preLoaderRoute: typeof AppClassificationRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/analysis': {
+      id: '/_app/analysis'
+      path: '/analysis'
+      fullPath: '/analysis'
+      preLoaderRoute: typeof AppAnalysisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/about': {
+      id: '/_app/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AppAboutRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAboutRoute: typeof AppAboutRoute
+  AppAnalysisRoute: typeof AppAnalysisRoute
+  AppClassificationRoute: typeof AppClassificationRoute
+  AppComparisonRoute: typeof AppComparisonRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppRegressionRoute: typeof AppRegressionRoute
+  AppUploadRoute: typeof AppUploadRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAboutRoute: AppAboutRoute,
+  AppAnalysisRoute: AppAnalysisRoute,
+  AppClassificationRoute: AppClassificationRoute,
+  AppComparisonRoute: AppComparisonRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppRegressionRoute: AppRegressionRoute,
+  AppUploadRoute: AppUploadRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
