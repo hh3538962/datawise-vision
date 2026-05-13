@@ -1,6 +1,6 @@
 # LumenML — FastAPI Backend
 
-Companion ML service for the LumenML frontend. Runs the full sklearn + XGBoost pipeline, exposes REST endpoints for training, prediction and comparison.
+Companion ML service for the LumenML frontend. Runs the exact scikit-learn pipeline from the course notebook (4 classifiers + 4 regressors) and exposes REST endpoints for training, prediction and comparison.
 
 ## Quick start (local)
 
