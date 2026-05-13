@@ -29,7 +29,7 @@ const sections = [
   },
   {
     icon: Rocket, title: "Tech stack",
-    body: "Frontend: React 19, TanStack Start, Tailwind v4, Framer Motion, Recharts. Backend: FastAPI, scikit-learn, XGBoost, Pandas, NumPy, Joblib. Deployed via Docker on Render with the frontend hosted on Lovable.",
+    body: "Frontend: React 19, TanStack Start, Tailwind v4, Framer Motion, Recharts. Backend: FastAPI, scikit-learn, Pandas, NumPy, Joblib. Deployed via Docker on Render with the frontend hosted on Lovable.",
   },
 ];
 
