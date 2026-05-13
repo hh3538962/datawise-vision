@@ -56,7 +56,7 @@ function Comparison() {
           <div className="text-right text-xs text-muted-foreground">
             <p>Reasoning</p>
             <p className="max-w-sm">{tab === "classification"
-              ? "Tree ensembles capture non-linear interactions between session, demographics and pricing — outperforming linear baselines and KNN."
+              ? "Tree ensembles capture non-linear interactions between session, demographics and pricing — outperforming the linear baseline."
               : "Boosting captures multiplicative pricing/quantity dynamics, lifting R² over linear methods."}</p>
           </div>
         </div>
