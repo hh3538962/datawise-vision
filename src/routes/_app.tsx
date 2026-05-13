@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_app")({
 function AppLayout() {
   return (
     <SidebarProvider defaultOpen>
-      <div className="flex min-h-screen w-full grid-bg">
+      <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
         <SidebarInset className="bg-transparent">
           <Topbar />
