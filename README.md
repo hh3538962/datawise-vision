@@ -74,25 +74,16 @@ using multiple machine learning algorithms and presents results through a profes
 ## Classification Models
 
 * Logistic Regression
-* KNN
-* Decision Tree
-* Random Forest
-* Support Vector Machine
-* Naive Bayes
-* Gradient Boosting
-* AdaBoost
-* XGBoost
+* Decision Tree Classifier
+* Random Forest Classifier
+* Gradient Boosting Classifier
 
 ## Regression Models
 
 * Linear Regression
-* Ridge Regression
-* Lasso Regression
 * Decision Tree Regressor
 * Random Forest Regressor
-* SVR
 * Gradient Boosting Regressor
-* XGBoost Regressor
 
 ---
 
