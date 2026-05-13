@@ -37,7 +37,8 @@ docker run -p 8000:8000 lumenml-api
 |---|---|---|
 | GET  | `/dataset/summary`         | row/col counts, missing, basic stats |
 | GET  | `/dataset/eda`             | correlations, distributions |
-| POST | `/train`                   | sweep all 9 classifiers + 8 regressors |
+| POST | `/train`                   | train all 4 classifiers + 4 regressors |
+| GET  | `/models/list`             | list available model names |
 | GET  | `/models/compare`          | leaderboard + best model |
 | POST | `/predict/classification`  | rating prediction + probabilities |
 | POST | `/predict/regression`      | revenue prediction + 90% interval |
@@ -46,11 +47,10 @@ docker run -p 8000:8000 lumenml-api
 ## Models
 
 **Classification** (target = `Customer_Rating`):
-Logistic Regression, KNN, Decision Tree, Random Forest, SVM, Naive Bayes,
-Gradient Boosting, AdaBoost, XGBoost.
+Logistic Regression, Decision Tree, Random Forest, Gradient Boosting.
 
 **Regression** (target = `Total_Amount`):
-Linear, Ridge, Lasso, Decision Tree, Random Forest, SVR, Gradient Boosting, XGBoost.
+Linear Regression, Decision Tree, Random Forest, Gradient Boosting.
 
 ## Note
 
