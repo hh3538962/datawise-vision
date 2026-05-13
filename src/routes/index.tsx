@@ -197,14 +197,14 @@ function Landing() {
               <p className="text-xs uppercase tracking-widest text-accent">Technology</p>
               <h2 className="mt-2 font-display text-3xl font-semibold">Built on a modern, production stack</h2>
               <p className="mt-3 text-muted-foreground">
-                React 19 + TanStack Start on the frontend; FastAPI + scikit-learn + XGBoost on the backend.
+                React 19 + TanStack Start on the frontend; FastAPI + scikit-learn on the backend.
                 Every component, chart and prediction is engineered to scale.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm md:grid-cols-3">
               {[
                 "React 19", "TanStack Start", "Tailwind v4", "Framer Motion", "Recharts",
-                "FastAPI", "scikit-learn", "XGBoost", "Pandas", "NumPy", "Docker", "Render",
+                "FastAPI", "scikit-learn", "Pandas", "NumPy", "Docker", "Render",
               ].map((t) => (
                 <div key={t} className="rounded-xl border border-border bg-card/40 px-3 py-2 text-center text-muted-foreground">
                   {t}
