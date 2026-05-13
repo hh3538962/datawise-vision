@@ -39,19 +39,25 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-4 py-5">
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-primary glow">
-            <Sparkles className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary">
+            <Sparkles className="h-4.5 w-4.5 text-primary-foreground" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-base font-semibold tracking-tight">Lumen<span className="text-gradient">ML</span></span>
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground">Business Analytics</span>
+            <span className="font-display text-[15px] font-semibold tracking-tight text-foreground">
+              Lumen<span className="text-primary">ML</span>
+            </span>
+            <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+              Business Analytics
+            </span>
           </div>
         </Link>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="px-2">
         {groups.map((g) => (
           <SidebarGroup key={g}>
-            <SidebarGroupLabel>{g}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {g}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {items.filter((i) => i.group === g).map((item) => {
@@ -59,9 +65,9 @@ export function AppSidebar() {
                   return (
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton asChild isActive={active}>
-                        <Link to={item.url} className="flex items-center gap-2.5">
+                        <Link to={item.url} className="flex items-center gap-2.5 rounded-md">
                           <item.icon className="h-4 w-4" />
-                          <span>{item.title}</span>
+                          <span className="text-[13px]">{item.title}</span>
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>

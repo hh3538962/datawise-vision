@@ -10,53 +10,46 @@ import {
   Database,
   Cpu,
   Github,
+  Check,
 } from "lucide-react";
+import models from "@/data/models.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LumenML — AI Business Analytics Platform" },
-      { name: "description", content: "Premium ML analytics platform with classification, regression, EDA and model comparison on real e-commerce data." },
-      { property: "og:title", content: "LumenML — AI Business Analytics Platform" },
-      { property: "og:description", content: "Compare 15+ ML models, predict customer behavior, and unlock business insights." },
+      { title: "LumenML — Machine Learning for Business Analytics" },
+      { name: "description", content: "A clean ML analytics platform: classification, regression, EDA, and model comparison on real e-commerce data. Built for a university final project." },
+      { property: "og:title", content: "LumenML — Machine Learning for Business Analytics" },
+      { property: "og:description", content: "Compare 4 classifiers + 4 regressors, predict customer behavior, and surface business actions." },
     ],
   }),
   component: Landing,
 });
 
-const stats = [
-  { label: "ML Models", value: "15+" },
-  { label: "Records Analyzed", value: "17K" },
-  { label: "Best Accuracy", value: "92%" },
-  { label: "Features", value: "18" },
-];
-
 const features = [
-  { icon: Brain, title: "Classification Engine", body: "9 algorithms predicting customer satisfaction with weighted F1, ROC and confusion matrices." },
-  { icon: Activity, title: "Regression Forecasts", body: "8 regressors estimating order revenue with RMSE, MAE and R² benchmarking." },
-  { icon: Layers, title: "Model Comparison", body: "Automated leaderboards highlight the best performer with feature-importance reasoning." },
-  { icon: LineChart, title: "Interactive EDA", body: "Correlation heatmaps, distributions and category breakdowns rendered in real time." },
-  { icon: Database, title: "Bring Your Data", body: "Drop a CSV that matches the schema and re-train every model on your own dataset." },
-  { icon: Cpu, title: "Production-Ready API", body: "FastAPI service ships with Docker + Render config — deploy in minutes." },
+  { icon: Brain, title: "Classification", body: "Logistic Regression, Decision Tree, Random Forest, and Gradient Boosting predicting Customer Rating." },
+  { icon: Activity, title: "Regression", body: "Four regressors estimating order revenue with RMSE, MAE, and R² benchmarks." },
+  { icon: Layers, title: "Model Comparison", body: "Leaderboards, confusion matrices, and feature importance — all side by side." },
+  { icon: LineChart, title: "Interactive EDA", body: "Correlation heatmaps, distributions, and category breakdowns rendered in real time." },
+  { icon: Database, title: "Bring Your Data", body: "Upload a CSV that matches the schema and retrain every model on your dataset." },
+  { icon: Cpu, title: "FastAPI Backend", body: "scikit-learn service ships with Docker + Render config — deploy in minutes." },
 ];
 
 function Landing() {
-  return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Aurora orbs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary/30 blur-3xl" />
-        <div className="absolute top-20 right-0 h-[400px] w-[400px] rounded-full bg-accent/30 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-[300px] w-[300px] rounded-full bg-success/20 blur-3xl" />
-      </div>
+  const bestClf = [...models.classification].sort((a, b) => b.f1 - a.f1)[0];
+  const bestReg = [...models.regression].sort((a, b) => b.r2 - a.r2)[0];
 
+  return (
+    <div className="relative min-h-screen mesh-bg">
       {/* Nav */}
-      <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+      <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-primary glow">
-            <Sparkles className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary">
+            <Sparkles className="h-4.5 w-4.5 text-primary-foreground" />
           </div>
-          <span className="font-display text-lg font-semibold">Lumen<span className="text-gradient">ML</span></span>
+          <span className="font-display text-[17px] font-semibold tracking-tight text-foreground">
+            Lumen<span className="text-primary">ML</span>
+          </span>
         </Link>
         <div className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           <a href="#features" className="hover:text-foreground transition">Features</a>
@@ -64,95 +57,93 @@ function Landing() {
           <a href="#team" className="hover:text-foreground transition">Team</a>
           <Link to="/about" className="hover:text-foreground transition">About</Link>
         </div>
-        <Link
-          to="/dashboard"
-          className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary px-5 py-2 text-sm font-medium text-primary-foreground glow transition hover:opacity-90"
-        >
-          Launch app <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+        <Link to="/dashboard" className="btn-primary">
+          Open dashboard <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </nav>
 
       {/* Hero */}
-      <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-12 md:pt-20">
+      <section className="relative mx-auto max-w-6xl px-6 pb-20 pt-10 md:pt-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto max-w-4xl text-center"
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-xs uppercase tracking-widest text-muted-foreground backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-            Final Project · ML for Business Analytics
+          <span className="chip">
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            University final project · ML for Business Analytics
           </span>
-          <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
+          <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-foreground md:text-6xl">
             Turn raw commerce data into{" "}
             <span className="text-gradient">predictive intelligence</span>.
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            A production-grade analytics workspace that benchmarks 15+ machine learning models,
-            forecasts revenue, predicts customer satisfaction and surfaces business actions —
-            from a single beautiful dashboard.
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-[17px]">
+            A clean analytics workspace that benchmarks ML models, forecasts revenue,
+            predicts customer satisfaction, and surfaces business actions — all from one dashboard.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/dashboard"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-primary px-7 py-3 text-sm font-medium text-primary-foreground glow transition hover:opacity-90"
-            >
-              Open dashboard <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link to="/dashboard" className="btn-primary">
+              Launch app <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-            <Link
-              to="/comparison"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-7 py-3 text-sm font-medium backdrop-blur transition hover:bg-card"
-            >
-              Compare models
-            </Link>
+            <Link to="/comparison" className="btn-ghost">Compare models</Link>
           </div>
+          <p className="mt-4 text-xs italic text-muted-foreground">
+            ✦ Loading intelligence… hopefully.
+          </p>
         </motion.div>
 
-        {/* Stats */}
+        {/* Stat strip */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.7 }}
-          className="mx-auto mt-20 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4"
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4"
         >
-          {stats.map((s) => (
-            <div key={s.label} className="glass rounded-2xl p-5 text-center">
-              <p className="font-display text-3xl font-semibold text-gradient">{s.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.label}</p>
+          {[
+            { v: "8", l: "ML models" },
+            { v: "17K", l: "Records" },
+            { v: `${(bestClf.accuracy * 100).toFixed(1)}%`, l: "Best accuracy" },
+            { v: bestReg.r2.toFixed(3), l: "Best R²" },
+          ].map((s) => (
+            <div key={s.l} className="surface px-4 py-4 text-center">
+              <p className="font-display text-2xl font-semibold tracking-tight text-foreground">{s.v}</p>
+              <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{s.l}</p>
             </div>
           ))}
         </motion.div>
 
         {/* Mock dashboard preview */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="relative mt-16"
+          transition={{ delay: 0.25, duration: 0.6 }}
+          className="relative mt-14"
         >
-          <div className="absolute inset-x-10 top-10 -z-10 h-72 bg-gradient-primary opacity-20 blur-3xl" />
-          <div className="glass-strong overflow-hidden rounded-3xl border border-border/80 p-2">
-            <div className="rounded-2xl bg-background/60 p-6">
-              <div className="flex items-center gap-2 border-b border-border/60 pb-3">
-                <span className="h-3 w-3 rounded-full bg-destructive/70" />
-                <span className="h-3 w-3 rounded-full bg-warning/70" />
-                <span className="h-3 w-3 rounded-full bg-success/70" />
-                <span className="ml-3 text-xs text-muted-foreground">lumen-ml.app/dashboard</span>
+          <div className="surface overflow-hidden p-2">
+            <div className="rounded-[calc(var(--radius-xl)-6px)] border border-border bg-secondary/40 p-5">
+              <div className="flex items-center gap-1.5 border-b border-border pb-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-destructive/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
+                <span className="ml-3 font-mono text-[11px] text-muted-foreground">lumen-ml.app/dashboard</span>
               </div>
-              <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-                {["Revenue", "Orders", "Avg Rating", "Best F1"].map((l, i) => (
-                  <div key={l} className="rounded-xl border border-border/60 bg-card/40 p-4">
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{l}</p>
-                    <p className="mt-1 font-display text-2xl font-semibold">
-                      {["$12.4M", "17,049", "3.41", "0.892"][i]}
-                    </p>
+              <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+                {[
+                  ["Revenue", "$12.4M"],
+                  ["Orders", "17,049"],
+                  ["Avg rating", "3.41"],
+                  ["Best F1", bestClf.f1.toFixed(3)],
+                ].map(([l, v]) => (
+                  <div key={l} className="rounded-lg border border-border bg-card p-3">
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{l}</p>
+                    <p className="mt-1 font-display text-xl font-semibold text-foreground">{v}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 grid gap-4 md:grid-cols-3">
-                <div className="md:col-span-2 h-44 rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-accent/10" />
-                <div className="h-44 rounded-xl border border-border/60 bg-gradient-to-br from-success/10 to-warning/10" />
+              <div className="mt-3 grid gap-3 md:grid-cols-3">
+                <div className="md:col-span-2 h-40 rounded-lg border border-border bg-gradient-to-br from-primary/5 to-accent/5" />
+                <div className="h-40 rounded-lg border border-border bg-gradient-to-br from-success/5 to-primary/5" />
               </div>
             </div>
           </div>
@@ -160,10 +151,12 @@ function Landing() {
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-12 max-w-2xl">
-          <p className="text-xs uppercase tracking-widest text-primary">What's inside</p>
-          <h2 className="mt-2 font-display text-4xl font-semibold">An end-to-end ML workspace</h2>
+      <section id="features" className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-10 max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-widest text-primary">What's inside</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            An end-to-end ML workspace
+          </h2>
           <p className="mt-3 text-muted-foreground">
             Every screen was designed to make machine-learning depth feel approachable for business stakeholders.
           </p>
@@ -172,41 +165,53 @@ function Landing() {
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.5 }}
-              className="glass group relative overflow-hidden rounded-2xl p-6 transition hover:-translate-y-1"
+              transition={{ delay: i * 0.04, duration: 0.4 }}
+              className="surface p-5 transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-primary glow">
-                <f.icon className="h-5 w-5 text-primary-foreground" />
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <f.icon className="h-4.5 w-4.5" />
               </div>
-              <h3 className="font-display text-lg font-semibold">{f.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
-              <div className="absolute -bottom-12 -right-12 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition group-hover:bg-primary/20" />
+              <h3 className="font-display text-base font-semibold text-foreground">{f.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Stack */}
-      <section id="stack" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="glass rounded-3xl p-10">
-          <div className="grid gap-10 md:grid-cols-2">
+      <section id="stack" className="mx-auto max-w-6xl px-6 py-16">
+        <div className="surface p-8 md:p-10">
+          <div className="grid gap-8 md:grid-cols-2">
             <div>
-              <p className="text-xs uppercase tracking-widest text-accent">Technology</p>
-              <h2 className="mt-2 font-display text-3xl font-semibold">Built on a modern, production stack</h2>
+              <p className="text-xs font-medium uppercase tracking-widest text-accent">Technology</p>
+              <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                Built on a modern, production stack
+              </h2>
               <p className="mt-3 text-muted-foreground">
-                React 19 + TanStack Start on the frontend; FastAPI + scikit-learn on the backend.
-                Every component, chart and prediction is engineered to scale.
+                React 19 + TanStack Start on the frontend. FastAPI + scikit-learn on the backend.
+                Every component, chart, and prediction is engineered to scale.
               </p>
+              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                {[
+                  "Stratified 80/20 split on the same notebook pipeline",
+                  "Weighted precision/recall for imbalanced ratings",
+                  "Real metrics — no placeholders, no fake numbers",
+                ].map((t) => (
+                  <li key={t} className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-success" /> {t}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="grid grid-cols-2 gap-3 text-sm md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-2 text-sm md:grid-cols-3">
               {[
                 "React 19", "TanStack Start", "Tailwind v4", "Framer Motion", "Recharts",
                 "FastAPI", "scikit-learn", "Pandas", "NumPy", "Docker", "Render",
               ].map((t) => (
-                <div key={t} className="rounded-xl border border-border bg-card/40 px-3 py-2 text-center text-muted-foreground">
+                <div key={t} className="rounded-md border border-border bg-secondary/40 px-3 py-2 text-center text-muted-foreground">
                   {t}
                 </div>
               ))}
@@ -216,55 +221,54 @@ function Landing() {
       </section>
 
       {/* Team */}
-      <section id="team" className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-12 max-w-2xl">
-          <p className="text-xs uppercase tracking-widest text-primary">Project team</p>
-          <h2 className="mt-2 font-display text-4xl font-semibold">Built by analytics students</h2>
+      <section id="team" className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mb-8 max-w-2xl">
+          <p className="text-xs font-medium uppercase tracking-widest text-primary">Project team</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-foreground">Built by analytics students</h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-3">
           {[
             { name: "Team Member 1", role: "Data & Modeling" },
             { name: "Team Member 2", role: "Frontend & UX" },
             { name: "Team Member 3", role: "Business Insights" },
           ].map((p, i) => (
-            <div key={i} className="glass flex items-center gap-4 rounded-2xl p-5">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-primary font-display text-lg font-semibold text-primary-foreground">
+            <div key={i} className="surface flex items-center gap-3 p-4">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-primary font-display text-sm font-semibold text-primary-foreground">
                 {p.name.split(" ").map((w) => w[0]).join("")}
               </div>
               <div>
-                <p className="font-medium">{p.name}</p>
+                <p className="text-sm font-medium text-foreground">{p.name}</p>
                 <p className="text-xs text-muted-foreground">{p.role}</p>
               </div>
             </div>
           ))}
         </div>
-        <p className="mt-6 text-xs text-muted-foreground">
-          Replace placeholders in <code className="rounded bg-card/60 px-1">src/routes/index.tsx</code> with your team's names.
+        <p className="mt-4 text-xs text-muted-foreground">
+          Replace placeholders in <code className="rounded bg-secondary px-1 font-mono">src/routes/index.tsx</code> with your team's names.
         </p>
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-4xl px-6 pb-24">
-        <div className="glass-strong relative overflow-hidden rounded-3xl p-10 text-center">
-          <div className="absolute inset-0 bg-gradient-primary opacity-10" />
-          <h2 className="relative font-display text-4xl font-semibold">Ready to explore the platform?</h2>
-          <p className="relative mt-3 text-muted-foreground">
-            Open the dashboard to see live KPIs, model leaderboards and prediction studios.
+      <section className="mx-auto max-w-4xl px-6 pb-20">
+        <div className="surface relative overflow-hidden p-10 text-center">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+          <h2 className="relative font-display text-3xl font-semibold tracking-tight text-foreground">
+            Ready to explore the platform?
+          </h2>
+          <p className="relative mt-2 text-muted-foreground">
+            Open the dashboard for live KPIs, model leaderboards, and prediction studios.
           </p>
-          <Link
-            to="/dashboard"
-            className="relative mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-primary px-7 py-3 text-sm font-medium text-primary-foreground glow"
-          >
-            Enter dashboard <ArrowRight className="h-4 w-4" />
+          <Link to="/dashboard" className="btn-primary relative mt-6">
+            Enter dashboard <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </section>
 
-      <footer className="mx-auto max-w-7xl border-t border-border px-6 py-8 text-xs text-muted-foreground">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} LumenML · University Final Project</p>
-          <div className="flex items-center gap-3">
-            <Github className="h-4 w-4" />
+      <footer className="border-t border-border">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-6 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} LumenML · University final project</p>
+          <div className="flex items-center gap-2">
+            <Github className="h-3.5 w-3.5" />
             <span>Made with React, TanStack Start & scikit-learn</span>
           </div>
         </div>

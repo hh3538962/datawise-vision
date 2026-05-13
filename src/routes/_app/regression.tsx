@@ -3,11 +3,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Activity, Sparkles, Loader2 } from "lucide-react";
 import {
-  LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid, ReferenceDot,
+  LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid,
 } from "recharts";
 import stats from "@/data/stats.json";
 import models from "@/data/models.json";
 import { fmtCurrency } from "@/lib/format";
+import { CHART, AXIS_TICK, GRID_STROKE, TOOLTIP_STYLE } from "@/lib/chart";
+import { emptyStates } from "@/lib/quips";
 
 export const Route = createFileRoute("/_app/regression")({
   head: () => ({ meta: [{ title: "Regression — LumenML" }] }),
@@ -22,16 +24,11 @@ const devices = Object.keys((stats as any).device);
 const initial = { unit_price: 250, quantity: 2, discount: 0, age: 35, session: 14, pages: 9, delivery: 5, rating: 4, gender: "Male", city: cities[0], category: cats[0], payment: payments[0], device: devices[0], returning: "TRUE" };
 
 function predictTotal(f: typeof initial) {
-  // base = price * qty - discount + small adjustments
   const base = f.unit_price * f.quantity - f.discount;
   const adj = (f.returning === "TRUE" ? 0.05 : 0) + (f.session > 14 ? 0.03 : 0) + (f.rating >= 4 ? 0.02 : -0.02);
   const pred = base * (1 + adj);
-  const lo = pred * 0.9;
-  const hi = pred * 1.1;
-  return { pred, lo, hi };
+  return { pred, lo: pred * 0.9, hi: pred * 1.1 };
 }
-
-const tooltip = { contentStyle: { background: "oklch(0.18 0.03 265)", border: "1px solid oklch(1 0 0 / 0.08)", borderRadius: 12 } };
 
 function Regression() {
   const [f, setF] = useState(initial);
@@ -46,14 +43,14 @@ function Regression() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-5">
-      <div className="glass rounded-2xl p-6 lg:col-span-3">
+      <div className="surface p-6 lg:col-span-3">
         <div className="mb-5 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary glow">
-            <Activity className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <Activity className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="font-display text-xl font-semibold">Order revenue forecaster</h2>
-            <p className="text-xs text-muted-foreground">Predicts Total_Amount with 90% confidence band</p>
+            <h2 className="font-display text-lg font-semibold text-foreground">Order revenue forecaster</h2>
+            <p className="text-xs text-muted-foreground">Predicts Total_Amount with a 90% confidence band</p>
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
@@ -72,38 +69,45 @@ function Regression() {
           <F label="Customer rating"><input type="number" value={f.rating} onChange={(e) => update("rating", +e.target.value)} className={inp} /></F>
           <S label="Returning" value={f.returning} onChange={(v) => update("returning", v)} options={["TRUE", "FALSE"]} />
         </div>
-        <button onClick={run} disabled={loading}
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-2.5 text-sm font-medium text-primary-foreground glow transition disabled:opacity-50">
+        <button onClick={run} disabled={loading} className="btn-primary mt-6 disabled:opacity-50">
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
           Predict revenue
         </button>
       </div>
 
       <div className="lg:col-span-2 space-y-4">
-        <motion.div key={pred?.pred ?? "none"} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-          className="glass relative overflow-hidden rounded-2xl p-6">
-          <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/30 blur-3xl" />
-          <p className="text-xs uppercase tracking-widest text-muted-foreground">Predicted revenue</p>
-          <p className="mt-3 font-display text-5xl font-semibold text-gradient">
-            {pred ? fmtCurrency(pred.pred) : "—"}
-          </p>
-          {pred && (
-            <p className="mt-2 text-sm text-muted-foreground">
-              90% interval: {fmtCurrency(pred.lo)} – {fmtCurrency(pred.hi)}
-            </p>
+        <motion.div key={pred?.pred ?? "none"} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+          className="surface p-6">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Predicted revenue</p>
+          {pred ? (
+            <>
+              <p className="mt-3 font-display text-4xl font-semibold leading-none tracking-tight text-gradient">
+                {fmtCurrency(pred.pred)}
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                90% interval: {fmtCurrency(pred.lo)} – {fmtCurrency(pred.hi)}
+              </p>
+              <p className="mt-3 text-xs italic text-muted-foreground">✦ Gradient Boosting carrying as usual.</p>
+            </>
+          ) : (
+            <div className="mt-3">
+              <p className="font-display text-2xl font-semibold text-foreground">{emptyStates.prediction.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{emptyStates.prediction.body}</p>
+            </div>
           )}
         </motion.div>
 
-        <div className="glass rounded-2xl p-5">
-          <h4 className="font-display text-sm font-semibold">Predicted vs actual (test set)</h4>
+        <div className="surface p-5">
+          <h4 className="font-display text-sm font-semibold text-foreground">Predicted vs actual (test set)</h4>
+          <p className="text-[11px] text-muted-foreground">First 80 samples</p>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={(models as any).pred_vs_actual.slice(0, 80)}>
-              <CartesianGrid strokeDasharray="3 3" stroke="oklch(1 0 0 / 0.06)" />
-              <XAxis dataKey="i" tick={{ fontSize: 10, fill: "oklch(0.7 0.02 260)" }} />
-              <YAxis tick={{ fontSize: 10, fill: "oklch(0.7 0.02 260)" }} />
-              <Tooltip {...tooltip} />
-              <Line dataKey="actual" stroke="oklch(0.78 0.18 200)" strokeWidth={2} dot={false} name="Actual" />
-              <Line dataKey="predicted" stroke="oklch(0.65 0.22 295)" strokeWidth={2} dot={false} name="Predicted" />
+              <CartesianGrid strokeDasharray="3 3" stroke={GRID_STROKE} />
+              <XAxis dataKey="i" tick={AXIS_TICK} />
+              <YAxis tick={AXIS_TICK} />
+              <Tooltip {...TOOLTIP_STYLE} />
+              <Line dataKey="actual" stroke={CHART.c1} strokeWidth={2} dot={false} name="Actual" />
+              <Line dataKey="predicted" stroke={CHART.c2} strokeWidth={2} dot={false} name="Predicted" />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -112,9 +116,9 @@ function Regression() {
   );
 }
 
-const inp = "w-full rounded-lg border border-border bg-card/40 px-3 py-2 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30";
+const inp = "w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 function F({ label, children }: { label: string; children: React.ReactNode }) {
-  return <div><label className="mb-1.5 block text-xs uppercase tracking-wider text-muted-foreground">{label}</label>{children}</div>;
+  return <div><label className="mb-1.5 block text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</label>{children}</div>;
 }
 function S({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: string[] }) {
   return (
