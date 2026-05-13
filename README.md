@@ -129,7 +129,6 @@ using multiple machine learning algorithms and presents results through a profes
 * Scikit-learn
 * Pandas
 * NumPy
-* XGBoost
 * Joblib
 
 ---
